@@ -7,9 +7,9 @@ export class MyLambdaStack extends cdk.Stack {
     super(scope, id, props);
 
     new Function(this, 'LambdaFunction', {
-      runtime: Runtime.NODEJS_18_X,
-      handler: 'index.handler',
-      code: new InlineCode('exports.handler = _ => "Hello, CDK";')
+      runtime: Runtime.JAVA_17,
+      handler: 'org.springframework.cloud.function.adapter.aws.FunctionInvoker::handleRequest',
+      code: new InlineCode('')
     });
   }
 }
