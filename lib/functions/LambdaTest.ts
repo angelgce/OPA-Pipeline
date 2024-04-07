@@ -1,6 +1,6 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-import { Code, Function, InlineCode, Runtime } from 'aws-cdk-lib/aws-lambda';
+import { Function, InlineCode, Runtime } from 'aws-cdk-lib/aws-lambda';
 
 export class MyLambdaStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -9,7 +9,7 @@ export class MyLambdaStack extends cdk.Stack {
     new Function(this, 'LambdaFunction', {
       runtime: Runtime.JAVA_17,
       handler: 'org.springframework.cloud.function.adapter.aws.FunctionInvoker::handleRequest',
-      code: Code.fromAsset('lambda')
+      code: new InlineCode('exports.handler = _ => "Hello, CDK";')
     });
   }
 }
